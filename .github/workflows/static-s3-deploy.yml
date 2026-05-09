@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: CheckeOut code form repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: aws-actions/configure AWS credentials
         with:
           aws-access-key-id: ${{ secrets.AWS_KEY }}
