@@ -1,23 +1,26 @@
 name: Deploy HTML to S3 bucket
-on: push
+
+on: 
+  push
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: CheckeOut code form repo
+      - name: Checkout code from repo
         uses: actions/checkout@v4
-      - name: aws-actions/configure AWS credentials
+
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
+
         with:
           aws-access-key-id: ${{ secrets.AWS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ap-south-1
-      - name: Copy index.html to the S3 bucket
+
+      - name: Copy index.html to S3 bucket
         run: |
-          aws s3 sync . /s3://c4chandu99-bucket/ \
-          --exclude "*" \
-          --include "index.html"
-          
-          
-          
-      
+          aws s3 sync . s3://c4chandu99-bucket/ \
+            --exclude "*" \
+            --include "index.html"
